@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Truco</title>
+  <meta name="description" content="Play Truco (Mineiro / Paulista) locally in your browser — hotseat 1v1, no install, no server.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="wrap">
+    <header class="top">
+      <h1>🃏 Truco</h1>
+      <a href="https://github.com/XQUEEZY/truco" target="_blank" rel="noopener">Source on GitHub</a>
+    </header>
+
+    <div class="scoreboard">
+      <div class="score-pill">
+        <div class="label" id="p1-label">Player 1</div>
+        <div class="value" id="p1-score">0</div>
+      </div>
+      <div class="score-pill">
+        <div class="label" id="p2-label">Player 2</div>
+        <div class="value" id="p2-score">0</div>
+      </div>
+    </div>
+
+    <div class="table-area">
+      <div class="vira-box">
+        <div class="tag">vira</div>
+        <div id="vira-card"></div>
+      </div>
+
+      <div class="plays" id="plays"></div>
+
+      <div class="truco-banner" id="truco-banner"></div>
+    </div>
+
+    <div class="hand-area">
+      <h3 id="hand-title">Your hand</h3>
+      <div class="hand-cards" id="hand-cards"></div>
+    </div>
+
+    <div class="actions" id="actions"></div>
+
+    <footer class="note">Local hotseat demo — pass the device between turns. Rules: Truco Mineiro, first to 12 points.</footer>
+  </div>
+
+  <div class="gate" id="pass-gate">
+    <h2 id="pass-title">Player 2's turn</h2>
+    <p>Pass the device to <span id="pass-name">Player 2</span>. Tap below when they're ready to see their hand.</p>
+    <button class="btn-truco" id="pass-btn">Show my hand</button>
+  </div>
+
+  <div class="overlay" id="win-overlay" hidden>
+    <h2 id="win-text"></h2>
+    <button class="btn-accept" id="win-restart">Play again</button>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="engine.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
