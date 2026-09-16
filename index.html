@@ -5,56 +5,98 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Truco</title>
   <meta name="description" content="Play Truco (Mineiro / Paulista) locally in your browser — hotseat 1v1, no install, no server.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="wrap">
-    <header class="top">
-      <h1>🃏 Truco</h1>
-      <a href="https://github.com/XQUEEZY/truco" target="_blank" rel="noopener">Source on GitHub</a>
-    </header>
+  <header class="topbar">
+    <h1>TRUCO <span class="badge">1v1</span></h1>
+    <a href="https://github.com/XQUEEZY/truco" target="_blank" rel="noopener">Source on GitHub</a>
+  </header>
 
-    <div class="scoreboard">
-      <div class="score-pill">
-        <div class="label" id="p1-label">Player 1</div>
-        <div class="value" id="p1-score">0</div>
+  <div class="felt" id="felt">
+    <div class="felt-seam"></div>
+
+    <div class="hud-row">
+      <div class="score-panel">
+        <div class="score-panel-head">
+          <span class="label">Score</span>
+          <span class="stake" id="stake-label">WORTH 1 PT</span>
+        </div>
+        <div class="score-row" id="score-row-0">
+          <span class="name" id="name-0">Player 1</span>
+          <div class="pips" id="pips-0"></div>
+          <span class="num" id="score-0">0</span>
+        </div>
+        <div class="score-row" id="score-row-1">
+          <span class="name" id="name-1">Player 2</span>
+          <div class="pips" id="pips-1"></div>
+          <span class="num" id="score-1">0</span>
+        </div>
       </div>
-      <div class="score-pill">
-        <div class="label" id="p2-label">Player 2</div>
-        <div class="value" id="p2-score">0</div>
+
+      <div class="manilha-hud" id="manilha-hud">
+        <div class="title">MANILHA ORDER (low ➔ high)</div>
+        <div class="chain" id="manilha-chain"></div>
       </div>
     </div>
 
-    <div class="table-area">
-      <div class="vira-box">
-        <div class="tag">vira</div>
-        <div id="vira-card"></div>
+    <div class="opponent-area">
+      <div class="player-id">
+        <div class="avatar" id="opp-avatar">P2</div>
+        <span class="pname" id="opp-name">Player 2</span>
       </div>
-
-      <div class="plays" id="plays"></div>
-
-      <div class="truco-banner" id="truco-banner"></div>
+      <div class="mini-cards" id="opp-cards"></div>
     </div>
 
-    <div class="hand-area">
-      <h3 id="hand-title">Your hand</h3>
+    <div class="center-area">
+      <div class="vira-area">
+        <div class="vira-stack">
+          <div class="card back vira-size"><span class="back-icon">♠</span></div>
+          <div class="card face vira-size vira-active" id="vira-card"></div>
+        </div>
+        <span class="vira-label">VIRA</span>
+      </div>
+
+      <div class="plays-col">
+        <div class="play-slot" id="play-opp"></div>
+        <div class="play-slot" id="play-you"></div>
+      </div>
+
+      <div class="truco-overlay" id="truco-overlay" hidden>
+        <div class="truco-big" id="truco-big-text">💥 TRUCO!</div>
+        <div class="truco-sub" id="truco-sub-text"></div>
+        <div class="truco-actions" id="truco-actions"></div>
+      </div>
+
+      <div class="end-overlay" id="end-overlay" hidden>
+        <div class="trophy-icon">🏆</div>
+        <div class="end-title" id="end-title"></div>
+        <div class="end-score" id="end-score"></div>
+        <button class="btn-gold" id="end-restart" style="padding:12px 32px; font-size:13px;">PLAY AGAIN</button>
+      </div>
+    </div>
+
+    <div class="bottom-area">
+      <div class="turn-row" id="turn-row"></div>
       <div class="hand-cards" id="hand-cards"></div>
+      <div class="player-id">
+        <div class="avatar" id="my-avatar">P1</div>
+        <span class="pname" id="my-name">Player 1</span>
+      </div>
     </div>
-
-    <div class="actions" id="actions"></div>
-
-    <footer class="note">Local hotseat demo — pass the device between turns. Rules: Truco Mineiro, first to 12 points.</footer>
   </div>
 
-  <div class="gate" id="pass-gate">
-    <h2 id="pass-title">Player 2's turn</h2>
-    <p>Pass the device to <span id="pass-name">Player 2</span>. Tap below when they're ready to see their hand.</p>
-    <button class="btn-truco" id="pass-btn">Show my hand</button>
-  </div>
+  <footer class="note">Local hotseat demo — pass the device between turns. Rules: Truco Mineiro, first to 12 points.</footer>
 
-  <div class="overlay" id="win-overlay" hidden>
-    <h2 id="win-text"></h2>
-    <button class="btn-accept" id="win-restart">Play again</button>
+  <div class="pass-gate" id="pass-gate">
+    <div class="pass-box">
+      <h2 id="pass-title">Player 2's turn</h2>
+      <p>Pass the device to <span id="pass-name">Player 2</span>. Tap below when they're ready to see their hand.</p>
+      <button class="btn-gold" id="pass-btn" style="padding:12px 28px; font-size:13px;">SHOW MY HAND</button>
+    </div>
   </div>
 
   <div class="toast" id="toast"></div>
